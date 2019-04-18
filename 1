@@ -1,0 +1,47 @@
+int M21=10; //defining the pins of arduino for servo motors
+int M12=6;
+int M22=9;  //Pin numbers depends on you whichever you wan to take
+int M11=11;
+int tregpin=4;  //The output pin of ultrasonic sensor
+int echopin=2;  //Input pin of Ultrasonic sensor
+
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+  Serial.begin(9600);
+  // initializing the digital pins as an output or for INPUT.
+  pinMode(M12, OUTPUT);
+  pinMode(M21, OUTPUT);
+  pinMode(tregpin, OUTPUT);
+  pinMode(echopin, INPUT);
+  pinMode(M22, OUTPUT);
+  pinMode(M11, OUTPUT);
+}
+
+// here is the loop function that runs continuosly over and over again
+void loop() {
+  int distance, duration;
+  digitalWrite(tregpin,HIGH);  //Ultrasonic sensor send a signal
+  delay(1000);
+  digitalWrite(tregpin,LOW);
+  duration=pulseIn(echopin,HIGH); 
+  distance=(duration/2)/29.1;  
+  Serial.println(distance);
+
+if(distance>10)     // robot will keep moving straight
+{
+    digitalWrite(M12,HIGH);
+    digitalWrite(M22,HIGH);
+    digitalWrite(M11,LOW);
+    digitalWrite(M21,LOW);
+}
+if(distance<=10)    //This code will turn the robot to right side
+{
+    digitalWrite(M11,HIGH);
+    digitalWrite(M21,LOW);
+    digitalWrite(M22,HIGH);
+    digitalWrite(M12,LOW);
+}
+}
+  
+  
