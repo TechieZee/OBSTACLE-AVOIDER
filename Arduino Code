@@ -25,7 +25,7 @@ void loop() {
   delay(1000);
   digitalWrite(tregpin,LOW);
   duration=pulseIn(echopin,HIGH); 
-  distance=(duration/2)/29.1;  
+  distance=(duration/2)/29.1;  //Calculate distance using speed-time formula for sound
   Serial.println(distance);
 
 if(distance>10)     // robot will keep moving straight
@@ -35,13 +35,16 @@ if(distance>10)     // robot will keep moving straight
     digitalWrite(M11,LOW);
     digitalWrite(M21,LOW);
 }
+
 if(distance<=10)    //This code will turn the robot to right side
 {
     digitalWrite(M11,HIGH);
     digitalWrite(M21,LOW);
     digitalWrite(M22,HIGH);
     digitalWrite(M12,LOW);
+    
 }
+
 }
   
   
